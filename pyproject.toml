@@ -2,7 +2,7 @@
 name = "fastapi-components"
 version = "0.3.0"
 description = "This library makes it easy to add dependencies to your fastapi service"
-authors = ["Dmitriy Troyan <troyan-dy@sber-zvuk.com>"]
+authors = ["Dmitriy Troyan <kashil.dima@yandex.ru>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
