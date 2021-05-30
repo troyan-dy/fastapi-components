@@ -1,8 +1,6 @@
 import abc
 
-from zvuk_service_lib.state import State
-
-
+from fastapi_components.state import State
 class BaseComponent(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     async def startup(self, state: State) -> State:
