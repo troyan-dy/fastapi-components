@@ -3,8 +3,8 @@ from typing import Optional
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import AnyUrl
 
-from zvuk_service_lib.components.base import BaseComponent
-from zvuk_service_lib.state import State
+from fastapi_components.components.base import BaseComponent
+from fastapi_components.state import State
 
 
 class MongoDsn(AnyUrl):

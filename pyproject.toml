@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fastapi-components"
-version = "0.3.0"
+version = "0.4.0"
 description = "This library makes it easy to add dependencies to your fastapi service"
 authors = ["Dmitriy Troyan <kashil.dima@yandex.ru>"]
 

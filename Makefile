@@ -7,12 +7,12 @@ clean:
 	@find . -type f -name "*.py[co]" -exec rm -rf {} +
 
 lint:
-	@poetry run mypy zvuk_service_lib/
-	@poetry run flake8 zvuk_service_lib/
+	@poetry run mypy fastapi_components/
+	@poetry run flake8 fastapi_components/
 
 format:
-	@poetry run black zvuk_service_lib/ tests/
-	@poetry run isort zvuk_service_lib/ tests/
+	@poetry run black fastapi_components/ tests/
+	@poetry run isort fastapi_components/ tests/
 
 setup:
 	@poetry install --no-root --no-dev -E all
@@ -25,4 +25,3 @@ build:
 
 publish:
 	@poetry publish -r zvuk
-

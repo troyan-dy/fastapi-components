@@ -2,8 +2,8 @@ from typing import List, Optional
 
 import aiokafka
 
-from zvuk_service_lib.components.base import BaseComponent
-from zvuk_service_lib.state import State
+from fastapi_components.components.base import BaseComponent
+from fastapi_components.state import State
 
 
 class KafkaProducerComponent(BaseComponent):
