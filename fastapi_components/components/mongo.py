@@ -6,7 +6,6 @@ from pydantic import AnyUrl, UrlConstraints
 from fastapi_components.components.base import BaseComponent
 from fastapi_components.state import State
 
-
 MongoDsn = Annotated[AnyUrl, UrlConstraints(allowed_schemes=["mongodb"])]
 
 

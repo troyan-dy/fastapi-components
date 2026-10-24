@@ -1,6 +1,7 @@
 from typing import Optional
 
 import aioredis
+
 from fastapi_components.components.base import BaseComponent
 from fastapi_components.state import State
 

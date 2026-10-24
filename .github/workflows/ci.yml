@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v7
+      - run: pipx install poetry
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: poetry
+      - run: poetry env use python${{ matrix.python-version }}
+      - run: poetry install -E all
+      - name: Check formatting
+        run: |
+          poetry run black --check fastapi_components/ examples/
+          poetry run isort --check-only fastapi_components/ examples/
+      - name: Lint
+        run: make lint
+      - name: Import all modules
+        run: |
+          poetry run python -c "import importlib, pkgutil, fastapi_components as p; [importlib.import_module(m.name) for m in pkgutil.walk_packages(p.__path__, p.__name__ + '.')]"

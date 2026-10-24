@@ -1,6 +1,7 @@
 from typing import Optional
 
 from aiopg.sa import Engine, create_engine
+
 from fastapi_components.components.base import BaseComponent
 from fastapi_components.state import State
 

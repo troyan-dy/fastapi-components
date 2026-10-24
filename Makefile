@@ -11,11 +11,11 @@ lint:
 	@poetry run flake8 fastapi_components/
 
 format:
-	@poetry run black fastapi_components/ tests/
-	@poetry run isort fastapi_components/ tests/
+	@poetry run black fastapi_components/ examples/
+	@poetry run isort fastapi_components/ examples/
 
 setup:
-	@poetry install --no-root --no-dev -E all
+	@poetry install --no-root --without dev -E all
 
 test:
 	@poetry run pytest tests/
