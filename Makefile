@@ -8,6 +8,9 @@ clean:
 
 lint:
 	@poetry run mypy fastapi_components/
+	@# flake8 silently skips the WPS codes from `select` if the plugin is missing
+	@poetry run python -c "import wemake_python_styleguide" 2>/dev/null \
+		|| (echo "wemake-python-styleguide is not installed, run: poetry install" >&2; exit 1)
 	@poetry run flake8 fastapi_components/
 
 format:

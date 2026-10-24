@@ -25,7 +25,7 @@ jobs:
         run: |
           poetry run black --check fastapi_components/ examples/
           poetry run isort --check-only fastapi_components/ examples/
-      - name: Lint
+      - name: Lint (mypy, flake8 + wemake-python-styleguide)
         run: make lint
       - name: Import all modules
         run: |

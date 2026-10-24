@@ -14,7 +14,7 @@ repos:
         pass_filenames: false
         types: [python]
       - id: lint
-        name: lint
+        name: lint (mypy, flake8 + wemake-python-styleguide)
         entry: make lint
         language: system
         pass_filenames: false
