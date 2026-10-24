@@ -1,2 +1,8 @@
 [flake8]
+# Base flake8 checks (pycodestyle, pyflakes, mccabe) plus wemake-python-styleguide.
+select = E, W, F, C90, WPS
 max-line-length = 120
+max-complexity = 6
+show-source = true
+statistics = false
+format = wemake

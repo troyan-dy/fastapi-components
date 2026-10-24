@@ -46,6 +46,7 @@ pytest-asyncio = "^1.4"
 ipdb = "^0.13.13"
 aioresponses = "^0.7.9"
 async-asgi-testclient = "^1.4.11"
+wemake-python-styleguide = "^1.8.1"
 
 
 [build-system]

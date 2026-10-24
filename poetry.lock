@@ -3633,6 +3633,26 @@ files = [
 ]
 
 [[package]]
+name = "wemake-python-styleguide"
+version = "1.8.1"
+description = "The strictest and most opinionated python linter ever"
+optional = false
+python-versions = "<4.0,>=3.10"
+groups = ["dev"]
+files = [
+    {file = "wemake_python_styleguide-1.8.1-py3-none-any.whl", hash = "sha256:811355a393536583236fa25409dc639809c1bd209f66dab012eb15e9f589784e"},
+    {file = "wemake_python_styleguide-1.8.1.tar.gz", hash = "sha256:a217caaf1cffe2d1168b13c405a204e82fe6c1bfc9f7d0b125dd4ce16624bc5f"},
+]
+
+[package.dependencies]
+attrs = "*"
+flake8 = ">=7.3,<8.0"
+pygments = ">=2.19,<3.0"
+
+[package.extras]
+mcp = ["mcp[cli] (>=2.0,<3.0)"]
+
+[[package]]
 name = "win32-setctime"
 version = "1.2.0"
 description = "A small Python utility to set file creation time on Windows"
@@ -3928,4 +3948,4 @@ web = ["fastapi", "uvicorn"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<4.0"
-content-hash = "b617ed5181258b239ec5da6bf498acdeb95ce8a305181e769fad3c6fb58f5acf"
+content-hash = "6cf777d29c8f445bd1ac6ffa174a13d70a2eac154211860cd9ec1cc6d584daf6"
