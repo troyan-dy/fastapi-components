@@ -1,7 +1,7 @@
 from typing import List
 
 from fastapi import FastAPI
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 
 from fastapi_components.components.base import BaseComponent
 from fastapi_components.lifecycle import Lifecycle

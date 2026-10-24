@@ -1,51 +1,60 @@
-[tool.poetry]
+[project]
 name = "fastapi-components"
 version = "0.4.1"
 description = "This library makes it easy to add dependencies to your fastapi service"
-authors = ["Dmitriy Troyan <kashil.dima@yandex.ru>"]
+authors = [{ name = "Dmitriy Troyan", email = "kashil.dima@yandex.ru" }]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "loguru>=0.7.3,<0.8",
+    "pydantic>=2.14,<3",
+    "pydantic-settings>=2.16,<3",
+]
 
-[tool.poetry.dependencies]
-python = "^3.9"
-loguru = "^0.5"
-pydantic = { version = "^1.7", extras = ["dotenv"] }
-aiopg = { version = "^1.1", optional = true }
-aioredis = { version = "^1.3", optional = true }
-aiokafka = { version = "^0.7", optional = true }
-uvicorn = { version = "^0.13", extras = ["uvloop"], optional = true }
-fastapi = { version = "^0.63", optional = true }
-sqlalchemy = { version = "~1.3.24", optional = true }
-motor = { version = "^2.3.1", optional = true }
-aiohttp = { version = "^3.7.3", optional = true }
+[project.optional-dependencies]
+redis = ["aioredis>=1.3.1,<2"]
+postgres = ["aiopg>=1.4,<2", "sqlalchemy>=1.4.54,<1.5"]
+kafka = ["aiokafka>=0.14,<0.15"]
+web = ["uvicorn[standard]>=0.54", "fastapi>=0.162"]
+mongo = ["motor>=3.7.1,<4"]
+aiohttp = ["aiohttp>=3.14,<4"]
+all = [
+    "aioredis>=1.3.1,<2",
+    "aiopg>=1.4,<2",
+    "sqlalchemy>=1.4.54,<1.5",
+    "aiokafka>=0.14,<0.15",
+    "uvicorn[standard]>=0.54",
+    "fastapi>=0.162",
+    "motor>=3.7.1,<4",
+    "aiohttp>=3.14,<4",
+    # aiopg needs async-timeout<5; pinning it here keeps a single version for `-E all`
+    "async-timeout>=4.0.3,<5",
+]
 
-[tool.poetry.extras]
-redis = ["aioredis"]
-postgres = ["aiopg", "sqlalchemy"]
-kafka = ["aiokafka"]
-web = ["uvicorn", "fastapi"]
-mongo = ["motor"]
-aiohttp = ["aiohttp"]
-all = ["aioredis", "aiopg", "sqlalchemy", "aiokafka", "uvicorn", "fastapi", "motor", "aiohttp"]
+[tool.poetry]
+packages = [{ include = "fastapi_components" }]
 
-[tool.poetry.dev-dependencies]
-black = "^20.8b1"
-isort = "^5.7"
-mypy = "^0.812"
-pytest = "^6.2"
-flake8 = "^3.8"
-testcontainers = "^3.2"
-pytest-asyncio = "^0.14"
-ipdb = "^0.13.7"
-aioresponses = "^0.7.2"
-async-asgi-testclient = "^1.4.6"
+[tool.poetry.group.dev.dependencies]
+black = "^26.10"
+isort = "^9.0"
+mypy = "^2.4"
+pytest = "^9.1"
+flake8 = "^7.4"
+testcontainers = "^4.15"
+pytest-asyncio = "^1.4"
+ipdb = "^0.13.13"
+aioresponses = "^0.7.9"
+async-asgi-testclient = "^1.4.11"
 
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 120
-target-version = ['py38']
+target-version = ['py311']
 
 [tool.isort]
 line_length=120

@@ -9,7 +9,7 @@ class AIOPostgresComponent(BaseComponent):
     engine: Optional[Engine]
 
     async def startup(self, state: State) -> State:
-        self.engine = await create_engine(state.settings.postgres_dsn)
+        self.engine = await create_engine(str(state.settings.postgres_dsn))
         state.db = self.engine
         return state
 
