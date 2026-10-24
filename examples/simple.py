@@ -1,5 +1,6 @@
 from fastapi import APIRouter, FastAPI
-from pydantic import BaseSettings, RedisDsn
+from pydantic import RedisDsn
+from pydantic_settings import BaseSettings
 
 from fastapi_components.components import AIOHTTPSessionComponent, AIORedisComponent
 from fastapi_components.state_manager import FastAPIStateManager

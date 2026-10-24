@@ -1,11 +1,13 @@
 import abc
 
 from fastapi_components.state import State
+
+
 class BaseComponent(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     async def startup(self, state: State) -> State:
-        pass
+        """Инициализирует компонент, кладёт его ресурсы в state и возвращает state."""
 
     @abc.abstractmethod
     async def shutdown(self) -> None:
-        pass
+        """Освобождает ресурсы компонента."""

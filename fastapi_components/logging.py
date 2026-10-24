@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 class InterceptLoguruHandler(logging.Handler):
     def __init__(self, stream: str = ""):
-        del stream
+        """Аргумент stream принимается для совместимости и не используется."""
         super().__init__()
 
     def emit(self, record: logging.LogRecord) -> None:
@@ -23,7 +23,8 @@ class InterceptLoguruHandler(logging.Handler):
         while frame.f_code.co_filename == logging.__file__:
             frame = frame.f_back  # type: ignore
             depth += 1
-        logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())
+        caller_logger = logger.opt(depth=depth, exception=record.exc_info)
+        caller_logger.log(level, record.getMessage())
 
 
 class LoggerSettings(BaseModel):

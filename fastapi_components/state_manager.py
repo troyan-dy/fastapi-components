@@ -1,7 +1,8 @@
+import functools
 from typing import List
 
 from fastapi import FastAPI
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 
 from fastapi_components.components.base import BaseComponent
 from fastapi_components.lifecycle import Lifecycle
@@ -28,7 +29,8 @@ class StateManager(Lifecycle):
         """Последовательно вызовет startup каждого компонента передавая в него state.
         В state можно писать, из него можно читать. Изначально в state только settings."""
         for component in self.components:
-            self.state = await component.startup(self.state)
+            # Sequential by contract: each component receives the state built by the previous ones.
+            self.state = await component.startup(self.state)  # noqa: WPS476
 
         self.started = True
 
@@ -36,7 +38,8 @@ class StateManager(Lifecycle):
         """Вызовет shutdown каждого компонента в обратном порядке."""
         if self.started:
             for component in reversed(self.components):
-                await component.shutdown()
+                # Sequential by contract: components stop in the reverse order of startup.
+                await component.shutdown()  # noqa: WPS476
 
 
 class FastAPIStateManager(StateManager):
@@ -45,19 +48,16 @@ class FastAPIStateManager(StateManager):
     def set_startup_hook(self, app: FastAPI) -> None:
         """Проставит startup hook FastAPI приложению,
         в котором вызовет у себя startup и перезапишет FastAPI.state на свой state"""
-
-        async def hook() -> None:
-            await self.startup()
-
-            # this is dangerous
-            app.state = self.state  # type: ignore
-
-        app.router.add_event_handler("startup", hook)
+        app.router.add_event_handler("startup", functools.partial(self._startup_app, app))
 
     def set_shutdown_hook(self, app: FastAPI) -> None:
         """Проставит shutdown hook FastAPI приложению, в котором вызовет у себя shutdown"""
+        app.router.add_event_handler("shutdown", self._shutdown_app)
 
-        async def hook() -> None:
-            await self.shutdown()
+    async def _startup_app(self, app: FastAPI) -> None:
+        await self.startup()
+        # this is dangerous
+        app.state = self.state  # type: ignore
 
-        app.router.add_event_handler("shutdown", hook)
+    async def _shutdown_app(self) -> None:
+        await self.shutdown()
