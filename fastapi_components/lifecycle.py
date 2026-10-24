@@ -4,8 +4,8 @@ import abc
 class Lifecycle(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     async def startup(self) -> None:
-        pass
+        """Запускает объект."""
 
     @abc.abstractmethod
     async def shutdown(self) -> None:
-        pass
+        """Останавливает объект."""
